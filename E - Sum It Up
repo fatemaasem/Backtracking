@@ -1,0 +1,74 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#include<cmath>
+#define ll long long 
+using namespace std;
+////////////////////////////////////////////////////////////
+
+int main()
+{
+	set<vector<int>>res;
+	int m;
+	int n;
+
+	set<int>s;
+	while (cin >> m) {
+		cin >> n;
+
+		if (n == 0)
+			break;
+		vector <int>vv(n);
+		vector<int>vvv;
+		for (int i = 0; i < n; i++) {
+			cin >> vv[i];
+		}
+		int test = (int)pow(2, n);
+		bool vvj = false;
+		for (int i = 0; i < test; i++) {
+			vector<int>v;
+
+			int sum = 0;
+			for (int j = 0; j < n; j++) {
+				if (i >> j & 1) {
+					sum += vv[j];
+					v.push_back(vv[j]);
+				}
+
+			}
+			if (sum == m) {
+				
+				s.insert(m * -1);
+				sort(v.begin(), v.end());
+				reverse(v.begin(), v.end());
+				res.insert(v);
+			}
+
+		}
+		cout << "Sums of " << m << ":\n";
+		if (res.empty())
+			cout << "NONE\n";
+		else {
+
+			for (auto io =res.rbegin();io!=res.rend();io++) {
+				
+				auto vector = (*io);
+				cout << vector[0];
+				for (int l = 1; l < vector.size(); l++) {
+					cout << "+" << vector[l];
+				}
+				cout << "\n";
+			}
+		}
+		res.clear();
+
+
+
+	}
+}
