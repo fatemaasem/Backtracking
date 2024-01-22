@@ -1,0 +1,76 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#include<cmath>
+#define ll long long 
+using namespace std;
+////////////////////////////////////////////////////////////
+vector < vector<int> >ans;
+vector<pair<int, int> >v2;
+bool val(int r, int c) {
+	
+		for (int i = 0; i < v2.size(); i++) {
+			if (r == v2[i].first)
+				return false;
+			if (abs(r - v2[i].first) == abs(c - v2[i].second))
+				return false;
+		}
+	
+	return true;
+}
+void solve(int col) {
+	if (col == 9) {
+		vector<int>v1;
+		for (int i = 0; i < 8; i++) {
+			v1.push_back((v2[i].first));
+			//cout << (v2[i].first) << " ";
+		}
+		//cout << "\n";
+		ans.push_back(v1);
+
+		return;
+	}
+	for (int row = 1; row <= 8; row++) {
+		if (val(row, col)) {
+			v2.push_back({ row, col });
+			solve(col + 1);
+			v2.pop_back();
+		}
+	}
+}
+int main() {
+	solve(1);
+	/*
+	for (auto io : ans) {
+		for (int i = 0; i < 8; i++)
+			cout << io[i];
+		cout << "\n";
+	}
+	*/
+	vector <int>y(8);
+	int t = 0;
+	while (cin >> y[0]) {
+		for (int i = 1; i < 8; i++)
+			cin >> y[i];
+		int m = 9;
+
+		for (auto io : ans) {
+			auto value = io;
+			int c = 0;
+
+			for (int j = 0; j < 8; j++) {
+				if (y[j] != value[j])
+					c++;
+			}
+			m = min(m, c);
+		}
+		cout << "Case "<<t+1<<": "<<m<<"\n";
+		t++;
+	}
+}
