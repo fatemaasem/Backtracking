@@ -1,0 +1,50 @@
+#include<iostream>
+#include<algorithm>
+#include<set>
+#include<stack>
+#include<string.h>
+#include<vector>
+#include<cmath>
+using namespace std ;
+
+int main() {
+int n;
+cin>>n;
+string s;
+cin>>s;
+sort(s.begin(),s.begin()+n);
+sort(s.begin()+n,s.begin()+2*n);
+//cout<<s;
+int i=0,l=n;
+if(s[i]==s[l]){
+	cout<<"NO\n";
+}
+else if(s[i]>s[l]){
+	bool v=true;
+while(i<n&&l<n*2){
+	if(s[i]<=s[l]){
+		v=false;
+		break;
+	}
+	i++;
+	l++;
+}
+if(v)cout<<"YES\n";
+else
+cout<<"NO\n";
+}
+else{
+	bool v=true;
+	while(i<n&&l<n*2){
+	if(s[i]>=s[l]){
+		v=false;
+		break;
+	}
+	i++;
+	l++;
+}
+if(v)cout<<"YES\n";
+else
+cout<<"NO\n";
+}
+}
