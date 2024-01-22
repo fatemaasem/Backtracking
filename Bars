@@ -1,0 +1,45 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#include<cmath>
+#define ll long long 
+using namespace std;
+////////////////////////////////////////////////////////////
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int m;
+		cin >> m;
+		int n;
+		cin >> n;
+		int test =(int) pow(2, n);
+		vector<int>v(n);
+		for (int i = 0; i < n; i++)
+			cin >> v[i];
+		for (int i = 0; i < test; i++) {
+			int sum = 0;
+			for (int j = 0; j < n; j++) {
+				if (i >> j & 1)
+					sum += v[j];
+
+			}
+			if (sum == m) {
+				cout << "YES\n";
+				break;
+			}
+			if (i == test - 1)
+				cout << "NO\n";
+		}
+	}
+	return 0;
+}
+C++
