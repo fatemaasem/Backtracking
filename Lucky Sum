@@ -1,0 +1,49 @@
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#define ll long long 
+using namespace std;
+
+set<ll>s;
+
+void solve(ll n) {
+	if (n > 0)
+		s.insert(n);
+	if (n > 1e9)
+		return;
+	solve(n * 10 + 7);
+	solve(n * 10 + 4);
+
+}
+
+using namespace std;
+int main() {
+	
+	
+	ll num1, num2;
+	cin >> num1 >> num2;
+	solve(0);
+	//cout << s.size();
+	ll sum = 0;
+	for (ll i =num1; i <= num2; i++) {
+		ll ne = *s.lower_bound(i);
+		if (ne <= num2) {
+			sum += (ne * ((ne)-i + 1));
+			i = (ne);
+		}
+		else
+		{
+			sum += (ne * (num2 - i + 1));
+			break;
+		}
+	}
+	
+	cout << sum <<"\n";
+}
+C++
